@@ -41,7 +41,25 @@ Commit message style
 While commit message style varies from person to person, this style guide describes some common best practices when writing commit messages.
 
 --------------------------------------------------------------------------------
+Leave 'detached HEAD' state
 
+Right now, your HEAD should still be 'detached' from Lesson 1 when you checked out an old commit. To fix that, run the command git checkout master. You'll learn more about what this command does later this lesson.
+
+Fix the delay bug
+
+Now, if you were following along with Caroline, you may have already fixed the bug in the Asteroids repository. If not, go ahead and make the change and add it to the staging area now.
+
+In game.js find the statement if (this.delayBeforeBullet <= 0) { (should be on line 423). On the next line, insert this.delayBeforeBullet = 10;
+
+Stage your change
+
+Then stage your change by adding the game.js file to the staging area. If you’re having trouble remembering how to stage changes, use this video as a refresher.
+
+Commit your change
+
+Now, go ahead and commit this change. Make sure to use a meaningful commit message! If you have trouble remember how to commit, refer to this video.
+
+When you’re finished committing your change, click “Next”.
 
 --------------------------------------------------------------------------------
 
