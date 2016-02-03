@@ -1,0 +1,299 @@
+How did viewing a diff between two versions of a file help you see the bug that
+was introduced?
+
+    Fill in your answer here
+
+How could having easy access to the entire history of a file make you a more
+efficient programmer in the long term?
+
+    Fill in your answer here
+
+What do you think are the pros and cons of manually choosing when to create a
+commit, like you do in Git, vs having versions automatically saved, like Google
+docs does?
+
+    Fill in your answer here
+
+Why do you think some version control systems, like Git, allow saving multiple
+files in one commit, while others, like Google Docs, treat each file separately?
+
+    Fill in your answer here
+
+How can you use the commands git log and git diff to view the history of files?
+
+    Fill in your answer here
+
+How might using version control make you more confident to make changes that
+could break something?
+
+    Fill in your answer here
+
+Now that you have your workspace set up, what do you want to try using Git for?
+
+    Fill in your answer here
+
+--------------------------------------------------------------------------------
+
+    Git command review
+
+    Compare two commits, printing each line that is present in one commit but not the other.
+
+    git diff will do this. It takes two arguments - the two commit ids to compare.
+
+
+    Make a copy of an entire Git repository, including the history, onto your own computer.
+
+    git clone will do this. It takes one argument - the url of the repository to copy.
+
+
+    Temporarily reset all files in a directory to their state at the time of a specific commit.
+
+    git checkout will do this. It takes one argument - the commit ID to restore.
+
+
+    Show the commits made in this repository, starting with the most recent.
+
+    git log will do this. It doesn't take any arguments.
+
+
+--------------------------------------------------------------------------------
+
+Behavior of git clone
+
+If someone else gives you the location of their directory or repository, you can copy or clone it to your own computer.
+
+This is true for both copying a directory and cloning a repository.
+
+As you saw in the previous lesson, if you have a URL to a repository, you can copy it to your computer using git clone.
+
+For copying a directory, you weren't expected to know this, but it is possible to copy a directory from one computer to another using the command scp, which stands for "secure copy". The name was chosen because the scp command lets you securely copy a directory from one computer to another.
+
+
+The history of changes to the directory or repository is copied.
+
+This is true for cloning a repository, but not for copying a directory. The main reason to use git clone rather than copying the directory is because git clone will also copy the commit history of the repository. However, copying can be done on any directory, whereas git clone only works on a Git repository.
+
+
+If you make changes to the copied directory or cloned repository, the original will not change.
+
+This is true for both copying a directory and cloning a repository. In both cases, you're making a copy that you can alter without changing the original.
+
+
+The state of every file in the directory or repository is copied.
+
+This is true for both copying a directory and cloning a repository. In both cases, all the files are copied.
+
+--------------------------------------------------------------------------------
+
+Behavior of git log
+
+git log lists the most recent commit first, as you can verify by checking the commit dates. The middle commit probably contains the code for the mute button, since the commit message indicates that the mute button was added in that commit. The top commit also probably contain the mute button, since that commit is more recent and nothing suggests the mute button has been removed. The bottom commit probably does not contain the mute button, since that commit was created before the commit that added the mute button.
+
+To summarize:
+
+commit 7be5a12f1567866b0d77ccdf2055d1a33831da78 (the top commit listed)
+
+Yes, probably contains the mute button.
+
+commit 06d72e1f95f046002ec46f41cf71957227111141 (the middle commit listed)
+
+Yes, probably contains the mute button.
+
+commit 3d4d45b246aad6a1cd0afaf7cfae26966110727e (the bottom commit listed)
+
+No, probably does not contain the mute button.
+
+git log output
+
+For reference, here is the git log output again:
+
+commit 7be5a12f1567866b0d77ccdf2055d1a33831da78
+Author: Ellison Leão <el@gmail.com>
+Date:   Fri Jul 11 12:56:26 2014 -0300
+
+    Add sound for the wing.
+
+commit 06d72e1f95f046002ec46f41cf71957227111141
+Author: Ellison Leão <el@gmail.com>
+Date:   Wed Jul 9 23:42:55 2014 -0300
+
+    Add mute button.
+
+commit 3d4d45b246aad6a1cd0afaf7cfae26966110727e
+Author: Ellison Leão <el@gmail.com>
+Date:   Mon Jul 7 17:35:47 2014 -0300
+
+    Fix leaderboard button
+Back to Quiz
+
+--------------------------------------------------------------------------------
+Behavior of git diff
+
+Consider the same partial git log output as in the previous exercise. Which arguments would you need to give the git diff command for the lines of code that implement the mute button to be marked as additions (with a plus sign)?
+
+To make the options on the next screen easier to read, only the first 6 characters of each commit ID have been included. This will not change the output of git diff unless two commits start with the same 6 characters.
+
+git log output
+
+For reference, here is the output from git log again:
+
+commit 7be5a12f1567866b0d77ccdf2055d1a33831da78
+Author: Ellison Leão <el@gmail.com>
+Date:   Fri Jul 11 12:56:26 2014 -0300
+
+    Add sound for the wing.
+
+commit 06d72e1f95f046002ec46f41cf71957227111141
+Author: Ellison Leão <el@gmail.com>
+Date:   Wed Jul 9 23:42:55 2014 -0300
+
+    Add mute button.
+
+commit 3d4d45b246aad6a1cd0afaf7cfae26966110727e
+Author: Ellison Leão <el@gmail.com>
+Date:   Mon Jul 7 17:35:47 2014 -0300
+
+    Fix leaderboard button
+--------------------------------------------------------------------------------
+
+Behavior of git checkout
+
+Checking out an earlier commit will change the state of at least one file.
+
+This is sometimes true. Git doesn't allow you to save a new commit if no files have been updated, so you might think this is always true. However, it's possible to do the following:
+
+Save a commit (call this commit 1).
+Update some files and save another commit (call this commit 2).
+Change all the files back to their state during commit 1, then save again (call this commit 3).
+This sometimes happens if commit 2 contained a bug, and it's important to fix the bug quickly. The easiest thing to do might be to remove all the changes introduced by commit 2 to fix the bug, then figure out how to safely reintroduce the changes later.
+
+At this point, commit 3 is the latest commit, so if you checkout commit 1, none of the files will be changed.
+
+
+Checking out an earlier commit will change the state of more than one file.
+
+Checking out an earlier commit will change the state of every file in the repository.
+
+Both of these are sometimes true. Since each commit tracks the state of all files in the repository, it is possible that checking out an earlier commit will change the state of multiple files, or even all the files in the repository. However, it is possible to save a new commit after changing only one file, so it is possible only one file will change.
+
+
+After checking out a commit, the state of all the files in the repository will be from the same point in time.
+
+This is always true. A commit saves a snapshot of all files in the repository at the time the commit was made, so checking out an earlier commit will result in all the files being reverted to their state at the time the commit was made. That is, the files will be in a consistent state.
+--------------------------------------------------------------------------------
+Cloning the repository
+
+You can clone the repository by running git clone https://github.com/udacity/pappu-pakia.git. To open the game in your web browser, follow the same process as in this video.
+
+Creators of the game
+
+As stated on the initial page of Pappu Pakia, the game was created by Rishabh and Kushagra. Many thanks to Kushagra and Rishabh for creating this awesome game! We made some modifications to the game to create the following exercises, but you can play the original version of their game here.
+
+Strange behavior
+
+If you actually started playing the version of the game that you cloned, you may have noticed some strange behavior. This is expected! You'll look into this behavior further in the next exercise.
+--------------------------------------------------------------------------------
+Buggy behavior
+
+The commit that introduced this bug has the ID 547f4171a82ec6429d002c1acef357aec41d3f17. One way to find this out would have been to run git log, which should have shown that the most recent 4 commits, and their commit ids, were:
+
+commit fa4c6bade4970c282b3870ad16f1bde8164663a9
+changing flattr link
+
+commit 708bcce690e5faa5739bd471507c102ea16b77f7
+pressing down arrow wont cause scroll down anymore
+
+commit 547f4171a82ec6429d002c1acef357aec41d3f17
+refactoring collision detection
+
+commit 71d52709ddc4066e7a79a1d0a412e43429a0cdeb
+removing old readme
+(This output has been shortened to be easier to read.)
+
+Then you could use git checkout to examine old commits and see which ones have the bug. You already know the most recent commit, "changing flattr link" has the bug, so you could run git checkout 708bcce690e5faa5739bd471507c102ea16b77f7 to test the second-most-recent commit . You should find that this commit also has the bug. Next, you'll find the commit "refactoring collision detection" also has the bug, but the commit "removing old readme" does not. That means the commit "refactoring collision detection" with commit ID 547f4171a82ec6429d002c1acef357aec41d3f17, is the one that introduced the bug.
+--------------------------------------------------------------------------------
+Examining the buggy commit
+
+Use Git's history to figure out what changes were introduced in the commit that caused the bug. On the next screen, check any changes that were introduced, and enter the name of the file that was affected.
+
+Finding and fixing the bug
+
+Now that you know what changes were introduced by the buggy commit, do you have any idea what could have caused the bug? If not, don't worry about it. The answer will be in the solution if you're curious.
+
+Once you've identified the code that caused the bug, obtain a working version of the game. You can do this by either:
+
+Figuring out what caused the bug (or check the solution), and modify the code to fix the bug
+Checking out the commit before the one with the bug. That commit won't contain the most up-to-date version of the code, but for the purposes of the upcoming exercise it won't matter.
+--------------------------------------------------------------------------------
+
+Changes introduced
+
+To find the lines introduced by the buggy commit, you can use git diff. You'll need the ID of the buggy commit, which you just found to be 547f4171a82ec6429d002c1acef357aec41d3f17. Then you'll need the ID of the previous commit, which will be the commit below it in git log. (That's because git log lists the most recent commit first.) That turns out to be 71d52709ddc4066e7a79a1d0a412e43429a0cdeb.
+
+Thus, by running git diff 71d52709ddc4066e7a79a1d0a412e43429a0cdeb 547f4171a82ec6429d002c1acef357aec41d3f17, you can find out that the lines changed by the buggy commit were:
+
+-    return !(
+-      bounds1.end_x < bounds2.start_x ||
+-      bounds2.end_x < bounds1.start_x ||
+-      bounds1.end_y < bounds2.start_y ||
+-      bounds2.end_y < bounds1.start_y
+-    );
+-
++    if (bounds1.end_x < bounds2.start_x) {
++        return true;
++    }
++    if (bounds2.end_x < bounds1.start_x) {
++        return true;
++    }
++    if (bounds1.end_y < bounds2.start_y) {
++        return true;
++    }
++    if (bounds2.end_y < bounds1.start_y) {
++        return true;
++    }
++    return false;
+This change represents an "or" expression being separated out into several "if" statements. The number of functions did not change, and no variables were renamed.
+
+File changed
+
+Near the top of the git diff output, you can see the lines
+
+--- a/js/utils.js
++++ b/js/utils.js
+This indicates that the file changed was js/utils.js, that is, the file utils.js within the js directory.
+
+What caused the bug
+
+Based on the change that was made, a reasonable guess is that the bug is some sort of logic error - maybe the new version does not return true and false at the correct times.
+
+It turns out that this is correct. The new code has true and false reversed! Even if you weren't sure exactly why the bug was there, congratulations! You tracked down exactly where the bug was introduced, and knew which lines introduced it, without knowing the code base. All you had to know was how to use Git.
+--------------------------------------------------------------------------------
+Changes introduced
+
+As before, you can use git diff to find the lines introduced by the buggy commit. Again, you'll need the ID of the buggy commit, which is 003c8c197cd3b1e5b28b58f53ee14d7ebaa9bb3a, and the ID of the previous commit, which is 746f762e38b5bbb7d0b837464ef6ec3f8ee5bf91.
+
+Thus, by running git diff 746f762e38b5bbb7d0b837464ef6ec3f8ee5bf91 003c8c197cd3b1e5b28b58f53ee14d7ebaa9bb3a, you can find out that the change made by the buggy commit was:
+
+-      clone.x += utils.randomNumber(5, 10);
+-      clone.y += utils.randomNumber(-20, 20);
++      clone.x += utils.randomNumber(500, 1000);
++      clone.y += utils.randomNumber(-2000, 2000);
+That is, the x and y coordinate of each clone is changed by a larger random amount. This will have the effect of making the clones move more quickly, or speed up, since their positions change more quickly.
+
+File changed
+
+Near the top of the git diff output, you can see the lines:
+
+--- a/js/pappu.js
++++ b/js/pappu.js
+This indicates that the file changed was js/pappu.js, that is, the file pappu.js in the directory js.
+
+What caused the bug
+
+Based on the change that was made, one possible bug is that the clones move too quickly - so quickly they have left the screen before you see them. This turns out to be correct. If you change the code to have numbers bigger than the original numbers, but smaller than the new numbers, the clones will move more quickly, but still be visible. Some lines of code that work well are:
+
+clone.x += utils.randomNumber(20, 40);
+clone.y += utils.randomNumber(-30, 30);
+Again, even if you weren't sure exactly why the bug was there, congratulations! You tracked down which lines introduced a bug without knowing the code base, just by using Git.
+
+--------------------------------------------------------------------------------
